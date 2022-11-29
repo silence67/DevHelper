@@ -1,0 +1,2 @@
+@TableId(value = "%s",type = IdType.AUTO)
+private %s %s;

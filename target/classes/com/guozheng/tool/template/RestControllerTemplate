@@ -1,0 +1,62 @@
+package {#pakageName}.controller.web;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import {#pakageName}.bean.{#beanName};
+import {#pakageName}.bean.ResponseData;
+import {#pakageName}.service.I{#beanName}Service;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import javax.annotation.Resource;
+
+@RestController
+@RequestMapping("/")
+public class {#beanName}Controller {
+
+    @Resource
+    private I{#beanName}Service {#lBeanName}Service;
+
+
+    @PostMapping ("/add{#beanName}")
+    private ResponseData add{#beanName}(@RequestBody @Validated  {#beanName} {#lBeanName}) {
+        boolean b = {#lBeanName}Service.save({#lBeanName});
+        if(b) {
+            return new ResponseData(true,"新增成功");
+        } else {
+            return new ResponseData(true,"新增失败");
+        }
+    }
+
+
+    @PostMapping ("/update{#beanName}")
+    private ResponseData update{#beanName}(@RequestBody {#beanName} {#lBeanName}){
+        boolean b = {#lBeanName}Service.updateById({#lBeanName});
+        if(b) {
+            return new ResponseData(true,"更新成功");
+        } else {
+            return new ResponseData(true,"更新失败");
+        }
+    }
+
+    @PostMapping ("/delete{#beanName}")
+    private ResponseData delete{#beanName}(@RequestBody {#beanName} {#lBeanName}) {
+        boolean b = {#lBeanName}Service.removeById({#lBeanName});
+        if(b) {
+            return new ResponseData(true,"删除成功");
+        } else {
+            return new ResponseData(true,"删除失败");
+        }
+    }
+
+
+    @PostMapping ("/search{#beanName}")
+    private ResponseData search{#beanName}(@RequestBody {#beanName} {#lBeanName}, int pageNum, int pageSize){
+        IPage<{#beanName}> page = new Page<>(pageNum, pageSize);
+        QueryWrapper<{#beanName}> queryWrapper = new QueryWrapper<>();
+        return new ResponseData({#lBeanName}Service.page(page,queryWrapper));
+    }
+
+
+}
