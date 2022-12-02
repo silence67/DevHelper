@@ -1,7 +1,0 @@
-package %s.service;
-
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.prohouduan.bean.%s;
-
-public interface I%sService extends IService<%s> {
-}
